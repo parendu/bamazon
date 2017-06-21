@@ -54,15 +54,15 @@ A CLI based application similar to Amazon
    3. Connect to database
    4. create functions
    			* startOrder
-   				* display available products (mySQL - SELECT command)
-   				* Format display data table (using cli-table)
-   				* call purschase function (prompt to start order)
+   				- display available products (mySQL - SELECT command)
+   				- Format display data table (using cli-table)
+   				- call purschase function (prompt to start order)
    			* purschase
-   				* prompt for item id
-   				* prompt for quantity 
-   				* update database based on order (mySQL - UPDATE)
-   				* Generate receipt
-   				* call startAgain function
+   				- prompt for item id
+   				- prompt for quantity 
+   				- update database based on order (mySQL - UPDATE)
+   				- Generate receipt
+   				- call startAgain function
    					- prompt for next order or complete the order
    			* startAgain
    				- prompt for confirmation for next order
