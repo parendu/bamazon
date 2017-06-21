@@ -20,19 +20,40 @@ var connection = mysql.createConnection({
 // 	console.log("connected as id "+ connection.threadId);
 // });
 
+//create row array to insert row into table
+var DataTable = function(results, table) {
+    results.forEach(function(row, index) {
+        var rowArray = new Array(5);
+        rowArray[0] = row.item_id,
+            rowArray[1] = row.product_name,
+            rowArray[2] = row.department_name,
+            rowArray[3] = row.price,
+            rowArray[4] = row.stock_quantity
+        table.push(rowArray);
+    })
+}
 //function to start new order, display available products
 function startOrder() {
     connection.query("SELECT * from products", function(err, results, fields) {
         if (err) { console.log(err) };
-        console.log(results);
+        // console.log(results);
       
-        console.log("item_id | product       | department_name | price | stock_quantity");
-        for (var i = 0; i < results.length; i++) {
-            console.log(results[i].item_id + "     | " + results[i].product_name + " | " + results[i].department_name + " | " + results[i].price + " | " + results[i].stock_quantity)
+        // console.log("item_id | product       | department_name | price | stock_quantity");
+        // for (var i = 0; i < results.length; i++) {
+        //     console.log(results[i].item_id + "     | " + results[i].product_name + " | " + results[i].department_name + " | " + results[i].price + " | " + results[i].stock_quantity)
 
         
-          };
-       
+        //   };
+        var table = new Table({
+            head: ['id', 'Product Name', 'Department', 'Quantity', 'Unit Price'],
+            colWidths: [10, 20, 20, 10, 10]
+        });
+
+        DataTable(results, table);
+        console.log(table.toString());
+
+        
+        purschase(results);
     });
 
 }
