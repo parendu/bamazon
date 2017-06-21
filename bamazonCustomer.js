@@ -58,6 +58,8 @@ function startOrder() {
 
 }
 
+//call startOver function
+startOrder();
 
 //create function to prompt for item id and quantity
 function purschase(order) {
@@ -105,13 +107,13 @@ function purschase(order) {
                                     console.log("Your Total amount is $ " + Total);
 
                                     console.log("================End================")
-                                    
+                                    startAgain();
                                 });
 
                         } else {
                             //If stock is not available 
                             console.log("Insufficient quantity!");
-                            
+                            startAgain();
                         }
 
                     }, this);
@@ -122,9 +124,24 @@ function purschase(order) {
 
             }); //connection query
 
-
-    }); //function (answer)
-
-
+	   }); //function (answer)
 
 } //purchase function
+// ask again to continue purschase
+
+function startAgain() {
+
+    inquirer.prompt([{
+        type: 'confirm',
+        name: 'startAgain',
+        message: 'Do you want to continue to purchase?'
+    }]).then(function(answer) {
+        if (answer.startAgain) {
+            startOrder();
+        } else {
+            console.log("Thank you for choosing Bamazon!");
+            connection.end();
+        }
+
+    });
+} //function
