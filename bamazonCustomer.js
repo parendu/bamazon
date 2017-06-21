@@ -76,8 +76,7 @@ function purschase(order) {
         name: 'quantity',
         message: 'Please enter the quantity, you would like to purchase: '
     }]).then(function(answer) {
-        console.log("purschase item: " + answer.itemId);
-        console.log("purschase quantity: " + answer.quantity);
+        
         var itemID = answer.itemId;
         var quantity = answer.quantity;
         //find out quantity in database for requested item id
@@ -93,6 +92,8 @@ function purschase(order) {
                         var item_price = element.price;
                         var Total = itemID * item_price;
                         //console.log(quantity);
+                        console.log("purschase product: " + product_name);
+        				console.log("purschase quantity: " + answer.quantity);
                         //compare purschase quantity and stock_quantity if stock is not enough, display error message
                         if (current_quantity > quantity) {
 
@@ -101,7 +102,7 @@ function purschase(order) {
                             connection.query("UPDATE products SET ? WHERE ?", [{ stock_quantity: new_quantity }, { item_id: itemID }],
                                 function(err, results) {
                                     if (err) { console.log(err) };
-                                    console.log("==========Order reciept===========")
+                                    console.log("==========Order receipt===========")
                                     console.log("Your order is completed:");
                                     console.log("Your ordered item: " + product_name + "  and quantity: " + quantity);
                                     console.log("Your Total amount is $ " + Total);
